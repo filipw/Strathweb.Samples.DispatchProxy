@@ -16,11 +16,11 @@ namespace DispatchProxySample
         }
     }
 
-    public class Greeting : DispatchProxy
+    public class GreetingProxy : DispatchProxy
     {
         private GreetingImpl _impl;
 
-        public Greeting()
+        public GreetingProxy()
         {
             _impl = new GreetingImpl();
         }
@@ -41,7 +41,7 @@ namespace DispatchProxySample
         public static object Create()
         {
             var internalType = Assembly.Load("Library").GetType("Library.IGreeting");
-            return typeof(DispatchProxy).GetMethod(nameof(DispatchProxy.Create)).MakeGenericMethod(internalType, typeof(Greeting)).Invoke(null, null);
+            return typeof(DispatchProxy).GetMethod(nameof(DispatchProxy.Create)).MakeGenericMethod(internalType, typeof(GreetingProxy)).Invoke(null, null);
         }
     }
 }
